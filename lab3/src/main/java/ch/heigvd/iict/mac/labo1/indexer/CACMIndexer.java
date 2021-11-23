@@ -3,6 +3,7 @@ package ch.heigvd.iict.mac.labo1.indexer;
 import ch.heigvd.iict.mac.labo1.parsers.ParserListener;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.*;
+import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -51,6 +52,19 @@ public class CACMIndexer implements ParserListener {
 		// TODO student: add to the document "doc" the fields given in
 		// parameters. You job is to use the right Field and FieldType
 		// for these parameters.
+		doc.add( new StoredField("id", id));
+
+		for(String author: authors.split(";")) {
+			doc.add( new StringField("authors", author, Field.Store.YES));
+		}
+
+		doc.add( new StringField("title", title, Field.Store.YES));
+
+		FieldType summaryField = new FieldType();
+		summaryField.putAttribute("summary", summary);
+		summaryField.setStored(false);
+		summaryField.setTokenized(true);
+		summaryField.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
 
 		try {
 			this.indexWriter.addDocument(doc);

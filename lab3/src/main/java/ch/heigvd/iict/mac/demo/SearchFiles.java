@@ -59,6 +59,8 @@ public class SearchFiles {
     String queryString = null;
     int hitsPerPage = 10;
 
+
+
     for(int i = 0;i < args.length;i++) {
       if ("-index".equals(args[i])) {
         index = args[i+1];
