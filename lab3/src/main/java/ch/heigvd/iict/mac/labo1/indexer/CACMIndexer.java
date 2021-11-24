@@ -2,6 +2,7 @@ package ch.heigvd.iict.mac.labo1.indexer;
 
 import ch.heigvd.iict.mac.labo1.parsers.ParserListener;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
@@ -11,7 +12,9 @@ import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
@@ -60,11 +63,11 @@ public class CACMIndexer implements ParserListener {
 
 		doc.add( new StringField("title", title, Field.Store.YES));
 
-		FieldType summaryField = new FieldType();
-		summaryField.putAttribute("summary", summary);
-		summaryField.setStored(false);
-		summaryField.setTokenized(true);
-		summaryField.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+		if(summary != null) {
+			FieldType summaryField = new FieldType();
+			summaryField.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+			doc.add(new Field("summary", summary, summaryField));
+		}
 
 		try {
 			this.indexWriter.addDocument(doc);
