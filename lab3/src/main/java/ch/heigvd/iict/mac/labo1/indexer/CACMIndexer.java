@@ -64,7 +64,7 @@ public class CACMIndexer implements ParserListener {
 		doc.add( new StringField("title", title, Field.Store.YES));
 
 		if(summary != null) {
-			FieldType summaryField = new FieldType();
+			FieldType summaryField = new FieldType(TextField.TYPE_NOT_STORED);
 			summaryField.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
 			doc.add(new Field("summary", summary, summaryField));
 		}

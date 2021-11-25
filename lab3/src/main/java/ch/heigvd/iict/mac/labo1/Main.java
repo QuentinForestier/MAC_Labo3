@@ -12,6 +12,9 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.analysis.Analyzer;
 
+import java.io.File;
+import java.io.IOException;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -26,8 +29,11 @@ public class Main {
 		CACMIndexer indexer = new CACMIndexer(analyser, similarity);
 		indexer.openIndex();
 		CACMParser parser = new CACMParser("documents/cacm.txt", indexer);
+		Long startTime = System.currentTimeMillis();
 		parser.startParsing();
 		indexer.finalizeIndex();
+		Long endTime = System.currentTimeMillis();
+		System.out.println((endTime - startTime) + " ms to create the index.");
 
 		QueriesPerformer queriesPerformer = new QueriesPerformer(analyser, similarity);
 
@@ -69,7 +75,7 @@ public class Main {
 
 		// TODO student
 		/* -------------- Standard --------------- */
-		return new StandardAnalyzer();
+//		return new StandardAnalyzer();
 
 		/* -------------- Whitespace --------------- */
 //		return new WhitespaceAnalyzer();
@@ -78,7 +84,7 @@ public class Main {
 //		return new EnglishAnalyzer();
 
 		/* -------------- Shingle 1 and 2--------------- */
-//		return new ShingleAnalyzerWrapper(2, 2);
+		return new ShingleAnalyzerWrapper(2, 2);
 
 		/* -------------- Shingle 1 and 3 --------------- */
 //		return new ShingleAnalyzerWrapper(3, 3);
