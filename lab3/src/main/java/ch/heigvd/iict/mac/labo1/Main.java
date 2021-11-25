@@ -4,6 +4,10 @@ import ch.heigvd.iict.mac.labo1.indexer.CACMIndexer;
 import ch.heigvd.iict.mac.labo1.parsers.CACMParser;
 import ch.heigvd.iict.mac.labo1.queries.QueriesPerformer;
 import ch.heigvd.iict.mac.labo1.similarities.MySimilarity;
+import org.apache.lucene.analysis.core.StopAnalyzer;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.shingle.ShingleAnalyzerWrapper;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.analysis.Analyzer;
@@ -63,7 +67,29 @@ public class Main {
 		// For the next part "Using different Analyzers" modify this method
 		// and return the appropriate Analyzers asked.
 
-		return new StandardAnalyzer(); // TODO student
+		// TODO student
+		/* -------------- Standard --------------- */
+		return new StandardAnalyzer();
+
+		/* -------------- Whitespace --------------- */
+//		return new WhitespaceAnalyzer();
+
+		/* -------------- English --------------- */
+//		return new EnglishAnalyzer();
+
+		/* -------------- Shingle 1 and 2--------------- */
+//		return new ShingleAnalyzerWrapper(2, 2);
+
+		/* -------------- Shingle 1 and 3 --------------- */
+//		return new ShingleAnalyzerWrapper(3, 3);
+
+		/* -------------- Stop --------------- */
+//		try {
+//			return new StopAnalyzer(new File("./common_words.txt").getAbsoluteFile().toPath());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 
 }
