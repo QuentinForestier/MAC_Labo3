@@ -81,10 +81,10 @@ public class Main {
 //		return new WhitespaceAnalyzer();
 
 		/* -------------- English --------------- */
-//		return new EnglishAnalyzer();
+		return new EnglishAnalyzer();
 
 		/* -------------- Shingle 1 and 2--------------- */
-		return new ShingleAnalyzerWrapper(2, 2);
+//		return new ShingleAnalyzerWrapper(2, 2);
 
 		/* -------------- Shingle 1 and 3 --------------- */
 //		return new ShingleAnalyzerWrapper(3, 3);
