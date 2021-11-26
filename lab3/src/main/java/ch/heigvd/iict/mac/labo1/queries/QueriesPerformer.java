@@ -79,13 +79,15 @@ public class QueriesPerformer {
 		// See "Searching" section
 
     	// Text used on query
-		System.out.println("\nSearching for [" + q +"]");
+		System.out.print("\nSearching for [" + q +"] ");
 
 		QueryParser parser = new QueryParser("summary", analyzer);
 
 		try {
       		// Query prepare
 			Query query = parser.parse(q);
+
+			System.out.println("as: " + query.toString("summary"));
 
       		// Query exec for top 10 best results
 			TopDocs results = indexSearcher.search(query, 10);
