@@ -9,6 +9,7 @@ import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.shingle.ShingleAnalyzerWrapper;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.analysis.Analyzer;
 
@@ -23,7 +24,7 @@ public class Main {
 		Analyzer analyser = getAnalyzer();
 
 		// TODO student "Tuning the Lucene Score"
-//		Similarity similarity = null;
+		//Similarity similarity = new ClassicSimilarity();
 		Similarity similarity = new MySimilarity();
 
 		CACMIndexer indexer = new CACMIndexer(analyser, similarity);
@@ -54,14 +55,14 @@ public class Main {
 
 	private static void searching(QueriesPerformer queriesPerformer) {
 		// Example
-		// queriesPerformer.query("compiler program");
+		 queriesPerformer.query("compiler program");
 
 		// TODO student
-		queriesPerformer.query("\"Information Retrieval\"");
-		queriesPerformer.query("Information && Retrieval");
-		queriesPerformer.query("+Retrieval Information NOT Database");
-		queriesPerformer.query("Info*");
-		queriesPerformer.query("\"Information Retrieval\"~10");
+//		queriesPerformer.query("\"Information Retrieval\"");
+//		queriesPerformer.query("Information && Retrieval");
+//		queriesPerformer.query("+Retrieval Information NOT Database");
+//		queriesPerformer.query("Info*");
+//		queriesPerformer.query("\"Information Retrieval\"~10");
 	}
 
 	private static Analyzer getAnalyzer() {
